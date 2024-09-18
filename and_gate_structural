@@ -1,0 +1,43 @@
+RTL :
+
+module and_pro(input wire a,b,output reg c);
+always@*
+    begin 
+        c= a& b;
+    end
+
+endmodule
+
+
+Test Bench :
+
+module tb_and_pro();
+
+reg a,b;
+wire c;
+
+and_pro DUT(a,b,c);
+    initial
+        begin
+        a=0;b=0;
+        #1;
+        a=0;b=1;
+        #1;
+        a=1;b=0;
+        #1;
+        a=1;b=1;
+        #1;
+        $finish(0);
+        end 
+    initial
+        begin
+        $dumpfile("test.vcd");
+        $dumpvars(1);
+        end
+    initial
+        begin
+        $monitor("a=%b b=%b c=%c",a,b,c);
+        end
+endmodule
+
+  
